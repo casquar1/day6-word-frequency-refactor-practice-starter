@@ -11,7 +11,7 @@ public class WordFrequencyGame {
     public String getResult(String inputStr) {
         String[] words = inputStr.split(SPACE_DELIMITER);
         try {
-            Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(getWordFrequencyInfo(words));
+            Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getWordFrequencyInfoMap(getWordFrequencyInfo(words));
             List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(wordFrequencyMap);
             return generatePrintLines(wordFrequencyInfoList);
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class WordFrequencyGame {
                 .collect(Collectors.joining(NEWLINE_DELIMITER));
     }
 
-    private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
+    private Map<String, List<WordFrequencyInfo>> getWordFrequencyInfoMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
         return wordFrequencyInfoList.stream()
                 .collect(Collectors.groupingBy(WordFrequencyInfo::getWord, Collectors.toList()));
     }
