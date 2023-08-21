@@ -37,28 +37,32 @@ public class WordFrequencyGame {
 
                 wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
 
-                StringJoiner joiner = new StringJoiner(NEWLINE_DELIMITER);
-                for (WordFrequencyInfo word : wordFrequencyInfoList) {
-                    String wordWithCount = word.getValue() + SPACE_CHARACTER + word.getWordCount();
-                    joiner.add(wordWithCount);
-                }
-                return joiner.toString();
+                return generatePrintLines(wordFrequencyInfoList);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
         }
     }
 
+    private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
+        StringJoiner joiner = new StringJoiner(NEWLINE_DELIMITER);
+        for (WordFrequencyInfo word : wordFrequencyInfoList) {
+            String wordWithCount = word.getWord() + SPACE_CHARACTER + word.getWordCount();
+            joiner.add(wordWithCount);
+        }
+        return joiner.toString();
+    }
+
     private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
         Map<String, List<WordFrequencyInfo>> map = new HashMap<>();
         for (WordFrequencyInfo wordFrequencyInfo : wordFrequencyInfoList) {
-            if (!map.containsKey(wordFrequencyInfo.getValue())) {
+            if (!map.containsKey(wordFrequencyInfo.getWord())) {
                 ArrayList wordFrequency = new ArrayList<>();
                 wordFrequency.add(wordFrequencyInfo);
-                map.put(wordFrequencyInfo.getValue(), wordFrequency);
+                map.put(wordFrequencyInfo.getWord(), wordFrequency);
             } else {
 
-                map.get(wordFrequencyInfo.getValue()).add(wordFrequencyInfo);
+                map.get(wordFrequencyInfo.getWord()).add(wordFrequencyInfo);
             }
         }
         return map;
