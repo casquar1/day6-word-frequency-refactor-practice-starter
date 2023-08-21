@@ -8,8 +8,8 @@ public class WordFrequencyGame {
     public static final String SPACE_CHARACTER = " ";
     public static final String CALCULATE_ERROR = "Calculate Error";
 
-    public String getResult(String inputStr) {
-        String[] words = inputStr.split(SPACE_DELIMITER);
+    public String getResult(String inputString) {
+        String[] words = inputString.split(SPACE_DELIMITER);
         try {
             List<WordFrequencyInfo> wordFrequencyInfo = getWordFrequencyInfo(words);
             Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getWordFrequencyInfoMap(wordFrequencyInfo);
