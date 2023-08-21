@@ -16,8 +16,8 @@ public class WordFrequencyGame {
             return inputStr + " 1";
         } else {
             try {
-                List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(inputStr);
-
+                String[] words = inputStr.split(SPACE_DELIMITER);
+                List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(words);
                 return generatePrintLines(wordFrequencyInfoList);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
@@ -25,9 +25,8 @@ public class WordFrequencyGame {
         }
     }
 
-    private List<WordFrequencyInfo> getWordFrequencyInfoList(String inputStr) {
+    private List<WordFrequencyInfo> getWordFrequencyInfoList(String[] words) {
         //split the input string with 1 to n pieces of spaces
-        String[] words = inputStr.split(SPACE_DELIMITER);
 
         List<WordFrequencyInfo> wordFrequencyInfoList = new ArrayList<>();
         for (String word : words) {
