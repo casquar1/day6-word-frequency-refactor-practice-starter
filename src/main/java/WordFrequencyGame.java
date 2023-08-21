@@ -23,22 +23,13 @@ public class WordFrequencyGame {
     }
 
     private List<WordFrequencyInfo> getWordFrequencyInfoList(String[] words) {
-        //split the input string with 1 to n pieces of spaces
-
-        List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfo(words);
-
         //get the wordFrequencyMap for the next step of sizing the same word
-        Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
+        Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(getWordFrequencyInfo(words));
 
-        List<WordFrequencyInfo> frequencyInfos = new ArrayList<>();
-        for (Map.Entry<String, List<WordFrequencyInfo>> entry : wordFrequencyMap.entrySet()) {
-            WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(entry.getKey(), entry.getValue().size());
-            frequencyInfos.add(wordFrequencyInfo);
-        }
-        wordFrequencyInfoList = frequencyInfos;
-
-        wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
-        return wordFrequencyInfoList;
+        return wordFrequencyMap.entrySet().stream()
+                .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
+                .sorted((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount())
+                .collect(Collectors.toList());
     }
 
     private static List<WordFrequencyInfo> getWordFrequencyInfo(String[] words) {
