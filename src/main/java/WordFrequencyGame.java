@@ -11,7 +11,8 @@ public class WordFrequencyGame {
     public String getResult(String inputStr) {
         String[] words = inputStr.split(SPACE_DELIMITER);
         try {
-            Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getWordFrequencyInfoMap(getWordFrequencyInfo(words));
+            List<WordFrequencyInfo> wordFrequencyInfo = getWordFrequencyInfo(words);
+            Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getWordFrequencyInfoMap(wordFrequencyInfo);
             List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(wordFrequencyMap);
             return generatePrintLines(wordFrequencyInfoList);
         } catch (Exception e) {
