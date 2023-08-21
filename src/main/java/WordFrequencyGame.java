@@ -11,15 +11,15 @@ public class WordFrequencyGame {
     public String getResult(String inputStr) {
         String[] words = inputStr.split(SPACE_DELIMITER);
         try {
-            List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(words);
+            Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(getWordFrequencyInfo(words));
+            List<WordFrequencyInfo> wordFrequencyInfoList = getWordFrequencyInfoList(wordFrequencyMap);
             return generatePrintLines(wordFrequencyInfoList);
         } catch (Exception e) {
             return CALCULATE_ERROR;
         }
     }
 
-    private List<WordFrequencyInfo> getWordFrequencyInfoList(String[] words) {
-        Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(getWordFrequencyInfo(words));
+    private List<WordFrequencyInfo> getWordFrequencyInfoList(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
         return wordFrequencyMap.entrySet().stream()
                 .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
                 .sorted((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount())
