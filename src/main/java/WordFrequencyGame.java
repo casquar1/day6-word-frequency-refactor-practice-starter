@@ -23,7 +23,7 @@ public class WordFrequencyGame {
     private List<WordFrequencyInfo> getWordFrequencyInfoList(Map<String, List<WordFrequencyInfo>> wordFrequencyMap) {
         return wordFrequencyMap.entrySet().stream()
                 .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
-                .sorted((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount())
+                .sorted(Comparator.comparing(WordFrequencyInfo::getWordCount).reversed())
                 .collect(Collectors.toList());
     }
 
